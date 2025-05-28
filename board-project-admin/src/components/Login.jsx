@@ -16,7 +16,7 @@ function Login() {
             type="email"
             id="email"
             required
-            onChange={globalState.changInputEmail}
+            onChange={globalState.changeInputEmail}
           />
         </div>
         <div className="form-group">
@@ -25,7 +25,7 @@ function Login() {
             type="password"
             id="password"
             required
-            onChange={globalState.changInputPw}
+            onChange={globalState.changeInputPw}
           />
         </div>
         <button type="submit">로그인</button>

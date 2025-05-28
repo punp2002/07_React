@@ -20,11 +20,11 @@ export const AuthProvider = ({ children }) => {
   const [password, setPassword] = useState("");
 
   // 이메일 입력 헨들러
-  const changInputEmail = (e) => {
+  const changeInputEmail = (e) => {
     setEmail(e.target.value);
   };
   // 패스워드 입력 핸들러
-  const changInputPw = (e) => {
+  const changeInputPw = (e) => {
     setPassword(e.target.value);
   };
 
@@ -78,12 +78,29 @@ export const AuthProvider = ({ children }) => {
     }, 60 * 60 * 1000); // 1시간 후
   };
 
+  // 로그아웃 처리 함수
+  const handleLogout = async () => {
+    try {
+      const resp = await axios.get("http://localhost/admin/logout");
+
+      console.log(resp);
+
+      if (resp.status === 200) {
+        localStorage.removeItem("userData");
+        setUser(null);
+      }
+    } catch (error) {
+      console.log("로그아웃 중 문제 발생 : ", error);
+    }
+  };
+
   // 자식(하위) 컴포넌트에게 전달할 데이터를 하나로 묶기
   const globalState = {
     user,
-    changInputEmail,
-    changInputPw,
+    changeInputEmail,
+    changeInputPw,
     handleLogin,
+    handleLogout,
   };
 
   return (
